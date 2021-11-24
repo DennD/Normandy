@@ -9,7 +9,7 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = 1500;
         config.height = 1000;
-        config.resizable = false;
+//        config.resizable = false;
         new LwjglApplication(new NormandyApp(), config);
     }
 }
