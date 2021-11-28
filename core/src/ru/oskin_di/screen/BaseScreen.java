@@ -153,8 +153,4 @@ public class BaseScreen implements Screen, InputProcessor {
         return false;
     }
 
-    public Vector2 getTouch() {
-        return touch;
-    }
-
 }

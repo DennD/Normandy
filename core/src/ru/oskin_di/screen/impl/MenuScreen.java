@@ -1,73 +1,103 @@
 package ru.oskin_di.screen.impl;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import ru.oskin_di.math.Rect;
 import ru.oskin_di.screen.BaseScreen;
-import ru.oskin_di.sprite.impl.Background;
-import ru.oskin_di.sprite.impl.Ship;
+import ru.oskin_di.sprite.impl.*;
 
 public class MenuScreen extends BaseScreen {
 
-    private Texture img;
+    private static final int STAR_COUNT = 256;
+
+    private final Game game;
+
     private Texture bg;
-    private Vector2 pos;
-    private Vector2 v;
-
     private Background background;
-    private Ship ship;
 
-    private final float V_LEN = 0.01f;
+    private TextureAtlas atlas;
+    private Star[] stars;
+    private ButtonExit buttonExit;
+    private ButtonPlay buttonPlay;
+
+    public MenuScreen(Game game) {
+        this.game = game;
+    }
 
     @Override
     public void show() {
         super.show();
-        img = new Texture("normandy.png");
-        bg = new Texture("galactic.jpg");
-        pos = new Vector2();
-        v = new Vector2();
+        bg = new Texture("textures/bg.png");
         background = new Background(bg);
-        ship = new Ship(img);
+
+        atlas = new TextureAtlas("textures/menuAtlas.tpack");
+
+        stars = new Star[STAR_COUNT];
+        for (int i = 0; i < stars.length; i++) {
+            stars[i] = new Star(atlas);
+        }
+        buttonExit = new ButtonExit(atlas);
+        buttonPlay = new ButtonPlay(atlas, game);
     }
 
     @Override
     public void resize(Rect worldBounds) {
         super.resize(worldBounds);
         background.resize(worldBounds);
-        ship.resize(worldBounds);
-
+        for (Star star : stars) {
+            star.resize(worldBounds);
+        }
+        buttonExit.resize(worldBounds);
+        buttonPlay.resize(worldBounds);
     }
 
     @Override
     public void render(float delta) {
         super.render(delta);
-        batch.begin();
-        background.draw(batch);
-        ship.draw(batch);
-
-        pos.set(ship.getLeft() + ship.getHalfWidth(), ship.getBottom() + ship.getHalfHeight());
-
-
-        if (pos.dst(getTouch()) > V_LEN) {
-            ship.move(v);
-        } else {
-            ship.stop(getTouch());
-        }
-
-        batch.end();
-
+        update(delta);
+        draw();
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        img.dispose();
         bg.dispose();
+        atlas.dispose();
     }
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
-        v.set(touch.cpy().sub(pos).setLength(V_LEN));
-        return super.touchDown(touch, pointer, button);
+        buttonExit.touchDown(touch, pointer, button);
+        buttonPlay.touchDown(touch, pointer, button);
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(Vector2 touch, int pointer, int button) {
+        buttonExit.touchUp(touch, pointer, button);
+        buttonPlay.touchUp(touch, pointer, button);
+        return false;
+    }
+
+    private void update(float delta) {
+        for (Star star : stars) {
+            star.update(delta);
+        }
+    }
+
+    private void draw() {
+        batch.begin();
+//        batch.setColor(1f, 1f, 1f, 1f);
+        background.draw(batch);
+        for (Star star : stars) {
+//            batch.setColor(Color.YELLOW);
+            star.draw(batch);
+//            batch.setColor(Color.CLEAR);
+        }
+        buttonExit.draw(batch);
+        buttonPlay.draw(batch);
+        batch.end();
     }
 }
