@@ -1,6 +1,8 @@
 package ru.oskin_di.screen.impl;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
@@ -16,6 +18,7 @@ public class MenuScreen extends BaseScreen {
 
     private Texture bg;
     private Background background;
+    private Music backgroundMusic;
 
     private TextureAtlas atlas;
     private Star[] stars;
@@ -31,6 +34,9 @@ public class MenuScreen extends BaseScreen {
         super.show();
         bg = new Texture("textures/bg.png");
         background = new Background(bg);
+        backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
+        backgroundMusic.play();
+        backgroundMusic.setLooping(true);
 
         atlas = new TextureAtlas("textures/menuAtlas.tpack");
 
