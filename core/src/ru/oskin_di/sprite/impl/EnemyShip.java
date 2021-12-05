@@ -9,17 +9,26 @@ import ru.oskin_di.sprite.Ship;
 
 public class EnemyShip extends Ship {
 
+    private boolean isFirstShoot;
+
     public EnemyShip(BulletPool bulletPool, Sound bulletSound, Rect worldBounds) {
         this.bulletPool = bulletPool;
         this.bulletSound = bulletSound;
         this.worldBounds = worldBounds;
         this.v = new Vector2();
-        this.v0 = new Vector2();
+        this.v0 = new Vector2(0, -0.8f);
+        this.isFirstShoot = false;
+
     }
 
     @Override
     public void update(float delta) {
-        super.update(delta);
+        if (getTop() > worldBounds.getTop()) {
+            pos.mulAdd(v0, delta);
+        } else {
+            firstShoot();
+            super.update(delta);
+        }
         if (getBottom() < worldBounds.getBottom()) {
             destroy();
         }
@@ -45,5 +54,12 @@ public class EnemyShip extends Ship {
         this.reloadInterval = reloadInterval;
         setHeightProportion(height);
         this.hp = hp;
+    }
+
+    private void firstShoot() {
+        if (!isFirstShoot) {
+            super.shoot();
+            isFirstShoot = true;
+        }
     }
 }

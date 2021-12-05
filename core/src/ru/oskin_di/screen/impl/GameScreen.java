@@ -11,6 +11,7 @@ import ru.oskin_di.pool.impl.BulletPool;
 import ru.oskin_di.pool.impl.EnemyPool;
 import ru.oskin_di.screen.BaseScreen;
 import ru.oskin_di.sprite.impl.Background;
+import ru.oskin_di.sprite.impl.EnemyShip;
 import ru.oskin_di.sprite.impl.MainShip;
 import ru.oskin_di.sprite.impl.Star;
 import ru.oskin_di.util.EnemyEmitter;
@@ -63,6 +64,11 @@ public class GameScreen extends BaseScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        for (EnemyShip enemyShip : enemyPool.getActiveObjects()) {
+            if (enemyShip.pos.dst(mainShip.pos) < 0.1f) {
+                enemyShip.destroy();
+            }
+        }
         update(delta);
         freeAllDestroyed();
         draw();
