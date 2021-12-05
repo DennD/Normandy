@@ -2,8 +2,8 @@ package ru.oskin_di.sprite.impl;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import ru.gb.screen.impl.GameScreen;
 import ru.oskin_di.math.Rect;
+import ru.oskin_di.screen.impl.GameScreen;
 import ru.oskin_di.sprite.BaseButton;
 
 public class ButtonPlay extends BaseButton {
