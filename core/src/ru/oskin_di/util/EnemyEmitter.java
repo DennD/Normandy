@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-
 import ru.oskin_di.math.Rect;
 import ru.oskin_di.pool.impl.EnemyPool;
 import ru.oskin_di.sprite.impl.EnemyShip;
