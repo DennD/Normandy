@@ -23,6 +23,7 @@ public class GameScreen extends BaseScreen {
     private Texture bg;
     private Background background;
     private GameOver gameOver;
+    private ButtonNewGame buttonNewGame;
 
     private ExplosionPool explosionPool;
     private BulletPool bulletPool;
@@ -50,6 +51,7 @@ public class GameScreen extends BaseScreen {
         explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
 
         gameOver = new GameOver(atlas);
+        buttonNewGame = new ButtonNewGame(atlas,this);
 
         explosionPool = new ExplosionPool(atlas, explosionSound);
         bulletPool = new BulletPool();
@@ -86,6 +88,7 @@ public class GameScreen extends BaseScreen {
         }
         mainShip.resize(worldBounds);
         gameOver.resize(worldBounds);
+        buttonNewGame.resize(worldBounds);
     }
 
     @Override
@@ -105,12 +108,14 @@ public class GameScreen extends BaseScreen {
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
         mainShip.touchDown(touch, pointer, button);
+        buttonNewGame.touchDown(touch,pointer,button);
         return false;
     }
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
         mainShip.touchUp(touch, pointer, button);
+        buttonNewGame.touchUp(touch,pointer,button);
         return false;
     }
 
@@ -178,6 +183,13 @@ public class GameScreen extends BaseScreen {
         }
     }
 
+    public void reload() {
+        bulletPool.dispose();
+        explosionPool.dispose();
+        enemyPool.dispose();
+        mainShip.reload();
+    }
+
     private void freeAllDestroyed() {
         explosionPool.freeAllDestroyed();
         bulletPool.freeAllDestroyed();
@@ -196,6 +208,7 @@ public class GameScreen extends BaseScreen {
             enemyPool.drawActiveSprites(batch);
         } else {
             gameOver.draw(batch);
+            buttonNewGame.draw(batch);
         }
         explosionPool.drawActiveSprites(batch);
         batch.end();
