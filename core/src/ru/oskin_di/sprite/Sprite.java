@@ -3,7 +3,6 @@ package ru.oskin_di.sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-
 import ru.oskin_di.math.Rect;
 import ru.oskin_di.util.Regions;
 
@@ -13,7 +12,7 @@ public class Sprite extends Rect {
     protected float scale = 1f;
     protected TextureRegion[] regions;
     protected int frame;
-    protected boolean destroyed;
+    private boolean destroyed;
 
     public Sprite() {
 

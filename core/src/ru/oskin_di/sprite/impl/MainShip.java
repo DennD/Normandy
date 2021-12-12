@@ -11,6 +11,7 @@ import ru.oskin_di.sprite.Ship;
 
 public class MainShip extends Ship {
 
+    private static final int HP = 100;
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
@@ -35,7 +36,18 @@ public class MainShip extends Ship {
         this.damage = 1;
         this.reloadInterval = RELOAD_INTERVAL;
         this.reloadTimer = 0;
-        this.hp = 100;
+        this.hp = HP;
+    }
+
+    public void startNewGame() {
+        hp = HP;
+        flushDestroy();
+        stop();
+        pressedLeft = false;
+        pressedRight = false;
+        leftPointer = INVALID_POINTER;
+        rightPointer = INVALID_POINTER;
+        pos.x = worldBounds.pos.x;
     }
 
     @Override
@@ -142,11 +154,6 @@ public class MainShip extends Ship {
                 break;
         }
         return false;
-    }
-
-    public void reload() {
-        hp = 100;
-        destroyed = false;
     }
 
     private void moveRight() {

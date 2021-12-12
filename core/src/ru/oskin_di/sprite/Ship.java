@@ -9,7 +9,6 @@ import ru.oskin_di.pool.impl.ExplosionPool;
 import ru.oskin_di.sprite.impl.Bullet;
 import ru.oskin_di.sprite.impl.Explosion;
 
-
 public class Ship extends Sprite {
 
     private static final float DAMAGE_ANIMATE_INTERVAL = 0.1f;
@@ -67,6 +66,10 @@ public class Ship extends Sprite {
 
     public int getHp() {
         return hp;
+    }
+
+    public Vector2 getV() {
+        return v;
     }
 
     @Override

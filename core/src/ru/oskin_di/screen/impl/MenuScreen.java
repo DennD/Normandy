@@ -1,14 +1,15 @@
 package ru.oskin_di.screen.impl;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import ru.oskin_di.math.Rect;
 import ru.oskin_di.screen.BaseScreen;
-import ru.oskin_di.sprite.impl.*;
+import ru.oskin_di.sprite.impl.Background;
+import ru.oskin_di.sprite.impl.ButtonExit;
+import ru.oskin_di.sprite.impl.ButtonPlay;
+import ru.oskin_di.sprite.impl.Star;
 
 public class MenuScreen extends BaseScreen {
 
