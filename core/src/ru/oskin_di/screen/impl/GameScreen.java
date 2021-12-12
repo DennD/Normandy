@@ -56,7 +56,7 @@ public class GameScreen extends BaseScreen {
     @Override
     public void show() {
         super.show();
-        bg = new Texture("textures/bg.png");
+        bg = new Texture("textures/bg.jpg");
         background = new Background(bg);
         atlas = new TextureAtlas("textures/mainAtlas.tpack");
         laserSound = Gdx.audio.newSound(Gdx.files.internal("sounds/laser.wav"));
