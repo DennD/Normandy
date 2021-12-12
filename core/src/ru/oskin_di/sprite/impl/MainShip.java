@@ -144,6 +144,11 @@ public class MainShip extends Ship {
         return false;
     }
 
+    public void reload() {
+        hp = 100;
+        destroyed = false;
+    }
+
     private void moveRight() {
         v.set(v0);
     }
