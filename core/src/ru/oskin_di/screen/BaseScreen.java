@@ -40,7 +40,7 @@ public class BaseScreen implements Screen, InputProcessor {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(Color.BROWN);
+        ScreenUtils.clear(Color.BLACK);
     }
 
     @Override
